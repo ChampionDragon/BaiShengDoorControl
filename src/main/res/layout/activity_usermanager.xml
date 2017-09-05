@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        style="@style/tt"
+        android:layout_width="match_parent" >
+
+        <TextView
+            style="@style/tt_tv"
+            android:layout_centerInParent="true"
+            android:text="用户管理" />
+
+        <ImageView
+            android:id="@+id/back_usermanager"
+            style="@style/tt_iv"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/title_im" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/userm_user"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:background="@color/white"
+            android:drawableLeft="@drawable/head"
+            android:drawablePadding="22dp"
+            android:drawableRight="@drawable/next_gray"
+            android:gravity="center_vertical"
+            android:paddingLeft="33dp"
+            android:paddingRight="44dp"
+            android:text="Lcb"
+            android:textSize="22dp" />
+
+        <TextView
+            android:id="@+id/userm_users"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="22dp"
+            android:layout_weight="2"
+            android:background="@color/white"
+            android:drawableLeft="@drawable/users"
+            android:drawablePadding="22dp"
+            android:drawableRight="@drawable/next_gray"
+            android:gravity="center_vertical"
+            android:paddingLeft="33dp"
+            android:paddingRight="44dp"
+            android:text="成员管理" />
+
+        <ImageView style="@style/iv" />
+
+        <TextView
+            android:id="@+id/userm_authorize"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="@color/white"
+            android:drawableLeft="@drawable/authorize"
+            android:drawablePadding="22dp"
+            android:drawableRight="@drawable/next_gray"
+            android:gravity="center_vertical"
+            android:paddingLeft="33dp"
+            android:paddingRight="44dp"
+            android:text="授权设备" />
+
+        <TextView
+            android:id="@+id/userm_set"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="22dp"
+            android:layout_weight="2"
+            android:background="@color/white"
+            android:drawableLeft="@drawable/set"
+            android:drawablePadding="22dp"
+            android:drawableRight="@drawable/next_gray"
+            android:gravity="center_vertical"
+            android:paddingLeft="33dp"
+            android:paddingRight="44dp"
+            android:text="设置" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

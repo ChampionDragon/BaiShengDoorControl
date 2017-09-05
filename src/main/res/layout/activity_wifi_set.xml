@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:background="@color/blue"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/back_wifiset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/title_im"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="22dp"
+            android:text="配置设备WIFI"
+            android:textColor="@color/white"
+            android:textSize="22sp"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:paddingLeft="22dp">
+
+            <TextView
+                android:layout_width="66dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="WIFI名"
+                android:textSize="@dimen/user_tv"/>
+
+            <TextView
+                android:id="@+id/wifiset_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/tv_left"
+                android:textColor="@color/blue_deep"
+                android:textSize="22sp"/>
+        </LinearLayout>
+
+        <ImageView style="@style/iv"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:paddingLeft="22dp">
+
+            <TextView
+                android:layout_width="66dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="WIFI密码"
+                android:textSize="@dimen/user_tv"/>
+
+            <EditText
+                android:maxLines="1"
+                android:id="@+id/wifiset_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/tv_left"
+                android:background="@null"
+                android:hint="请输入WIFI密码"
+                android:textColor="@color/blueSky"
+                android:textSize="@dimen/user_tv"/>
+        </LinearLayout>
+
+        <ImageView style="@style/iv"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/wifiset_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="33dp"
+            android:layout_marginRight="33dp"
+            android:background="@drawable/btn_bg"
+            android:text="配置WIFI"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+</LinearLayout>

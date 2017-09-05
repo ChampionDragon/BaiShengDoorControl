@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        style="@style/tt"
+        android:layout_width="match_parent">
+
+        <TextView
+            style="@style/tt_tv"
+            android:layout_centerInParent="true"
+            android:text="版本升级"/>
+
+        <ImageView
+            android:id="@+id/back_update"
+            style="@style/tt_iv"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/title_im"/>
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/update_download"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/adddevice_height"
+        android:layout_marginLeft="@dimen/adddevice_left"
+        android:layout_marginRight="@dimen/adddevice_left"
+        android:layout_marginTop="66dp"
+        android:background="@drawable/btn_bg"
+        android:text="直接更新到最新版本"
+        android:textColor="@color/white"/>
+
+    <Button
+        android:id="@+id/update_check"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/adddevice_height"
+        android:layout_marginLeft="@dimen/adddevice_left"
+        android:layout_marginRight="@dimen/adddevice_left"
+        android:layout_marginTop="66dp"
+        android:background="@drawable/btn_bg"
+        android:text="先查询，后更新"
+        android:textColor="@color/white"/>
+
+
+</LinearLayout>

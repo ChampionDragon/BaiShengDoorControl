@@ -1,0 +1,152 @@
+<resources>
+
+    <style name="AppBaseTheme" parent="android:Theme.Light"></style>
+    <!-- 公用样式 -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="android:windowBackground">@color/bg_main</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="wifiBg">
+        <item name="android:background">@drawable/wifi_bg</item>
+        <item name="android:textColor">@drawable/wifi_text_color</item>
+    </style>
+
+    <style name="iv">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/gray_shallow</item>
+    </style>
+
+    <style name="iv_gray">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/gray</item>
+    </style>
+
+    <style name="iv_main">
+        <item name="android:layout_width">26dp</item>
+        <item name="android:layout_height">26dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <!-- popwindow的样式 -->
+    <style name="PopupAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/popup_enter</item>
+        <item name="android:windowExitAnimation">@anim/popup_exit</item>
+    </style>
+
+    <!-- Title样式 -->
+    <style name="tt">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">68dp</item>
+        <item name="android:background">@color/blue</item>
+    </style>
+
+    <style name="tt_tv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="tt_iv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">6dp</item>
+    </style>
+
+    <!-- Dialog样式 -->
+    <style name="dialog" parent="android:Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <!-- Dialog的windowFrame框为无 -->
+        <item name="android:windowBackground">@color/transparent</item>
+        <!-- 切记一定要设置为透明状态，不然有阴影 -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 背景是否模糊显示 -->
+        <item name="android:backgroundDimAmount">0.4</item>
+    </style>
+    <!-- slideMenu的样式 -->
+    <style name="menu_tv">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:drawableRight">@drawable/next</item>
+        <item name="android:drawablePadding">22dp</item>
+        <item name="android:layout_marginTop">33dp</item>
+    </style>
+
+
+    <!--萤石摄像头-->
+
+    <style name="LoadingTextView">
+        <item name="textStyle">vertical</item>
+        <item name="textColor">@color/gray_text</item>
+        <item name="textSize">12sp</item>
+        <item name="textPadding">5dp</item>
+        <item name="android:text">@string/loading_text_default</item>
+    </style>
+
+    <style name="LoadingTextView_Percent" parent="LoadingTextView">
+        <item name="textPadding">10dp</item>
+        <item name="textSize">15sp</item>
+        <item name="android:text"/>
+    </style>
+
+    <style name="TitleBar_Light">
+        <item name="textColor">@color/common_text</item>
+        <item name="background">@drawable/common_title</item>
+        <item name="backButton">@drawable/common_title_back_selector</item>
+    </style>
+
+    <style name="TitleBar_Light_Web" parent="TitleBar_Light">
+        <item name="backButton">@drawable/common_title_cancel_selector</item>
+    </style>
+
+    <style name="TitleBar_Dark">
+        <item name="textColor">@android:color/white</item>
+        <item name="background">@color/dark_bg_70p</item>
+        <item name="backButton">@drawable/message_back_selector</item>
+    </style>
+
+    <style name="CommonListView" parent="@android:style/Widget.ListView">
+        <item name="android:cacheColorHint">#0000</item>
+        <item name="android:fadingEdgeLength">0dp</item>
+        <item name="android:listSelector">#0000</item>
+        <item name="android:fastScrollEnabled">false</item>
+        <item name="android:dividerHeight">0dp</item>
+        <item name="android:divider">@null</item>
+        <item name="android:headerDividersEnabled">false</item>
+        <item name="android:footerDividersEnabled">false</item>
+    </style>
+
+    <style name="popwindowUpAnim">
+        <item name="android:windowEnterAnimation">@anim/fade_up</item>
+        <item name="android:windowExitAnimation">@anim/fade_down</item>
+    </style>
+
+    <style name="auto_wifi_status_style_normal">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/common_sub_text</item>
+        <item name="android:textSize">@dimen/loading_text_size</item>
+    </style>
+
+    <style name="CommonGroupLayout">
+        <item name="dividerHeight">0.5dp</item>
+        <item name="dividerColor">@color/c8</item>
+        <item name="itemSelector">@drawable/grouplayout_item_bg_selector</item>
+        <item name="dividerPadding">@dimen/device_set_padding</item>
+        <item name="android:background">@android:color/white</item>
+    </style>
+
+
+</resources>

@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        style="@style/tt"
+        android:layout_width="match_parent">
+
+        <TextView
+            style="@style/tt_tv"
+            android:layout_centerInParent="true"
+            android:text="百胜智能"/>
+
+        <ImageView
+            android:id="@+id/back_wv"
+            style="@style/tt_iv"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/title_im"/>
+
+
+    </RelativeLayout>
+    <ProgressBar
+        android:id="@+id/webview_pb"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:layout_alignParentBottom="true"
+        android:progressDrawable="@drawable/webview_pb"
+        android:visibility="gone"
+        />
+
+    <WebView
+        android:id="@+id/wv_ad"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

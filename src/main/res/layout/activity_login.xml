@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loginbg"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <RelativeLayout style="@style/tt" >
+
+        <TextView
+            style="@style/tt_tv"
+            android:layout_centerInParent="true"
+            android:text="登录" />
+
+        <ImageView
+            android:id="@+id/back_login"
+            style="@style/tt_iv"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/title_im" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3" >
+
+        <ImageView
+            android:layout_width="99dp"
+            android:layout_height="99dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/bs_login" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:orientation="vertical"
+        android:paddingLeft="33dp"
+        android:paddingRight="33dp" >
+
+        <EditText
+            android:id="@+id/login_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLength="11"
+            android:drawableLeft="@drawable/phone"
+            android:drawablePadding="11dp"
+            android:hint="手机"
+            android:text="test"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@color/blueSky"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:src="@color/blue_deep" />
+
+        <EditText
+            android:id="@+id/login_psw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:background="@null"
+            android:maxLength="6"
+            android:drawableLeft="@drawable/psw"
+            android:drawablePadding="11dp"
+            android:hint="密码"
+            android:text="123456"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColor="@color/blueSky"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:src="@color/blue_deep" />
+
+        <TextView
+            android:id="@+id/login_resetpwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="5dp"
+            android:text="忘记密码"
+            android:textColor="@drawable/login_text_color"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/login_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/login_btn_bg"
+            android:text="登 录"
+            android:textColor="@drawable/login_text_color"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/login_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/login_btn_bg"
+            android:text="注 册"
+            android:textColor="@drawable/login_text_color"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2" />
+
+</LinearLayout>

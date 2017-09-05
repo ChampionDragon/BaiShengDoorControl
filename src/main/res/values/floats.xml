@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="help_tv" format="float" type="dimen">1.2</item>
+</resources>
+
+    <!--andriod 默认不支持float型的设置，在values 下的新建floats.xml 文件-->

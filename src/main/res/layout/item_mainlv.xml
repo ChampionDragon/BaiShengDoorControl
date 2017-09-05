@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="22dp"
+    android:paddingRight="22dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="11dp"
+    android:paddingTop="11dp" >
+
+    <ImageView
+        android:id="@+id/mainlv_iv_left"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/icon"
+        android:gravity="center_vertical" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="11dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/mainlv_tv_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="广告道闸" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/mainlv_tv_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="10351135" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/mainlv_iv_level"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:contentDescription="@string/app_name"
+        android:gravity="center_vertical"
+        android:src="@drawable/wifi_signal_open" />
+
+</LinearLayout>

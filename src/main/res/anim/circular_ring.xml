@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <rotate
+        android:duration="800"
+        android:fillAfter="true"
+        android:fromDegrees="0"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:repeatCount="9999999"
+        android:toDegrees="359"/>
+</set>
+
+    <!--android:interpolator="@android:anim/linear_interpolator"
+        在这里写没用要在.java代码里写
+        mAnimation = AnimationUtils.loadAnimation(this, R.anim.circular_ring);
+        解决无限旋转卡顿的问题
+        LinearInterpolator lin = new LinearInterpolator();
+        mAnimation.setInterpolator(lin);
+        -->

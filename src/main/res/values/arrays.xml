@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="devicename">
+        <item>广告道闸</item>
+        <item>伸缩门</item>
+        <item>户外平开门</item>
+        <item>户内平开门</item>
+        <item>折叠门</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout style="@style/tt" >
+
+        <TextView
+            style="@style/tt_tv"
+            android:layout_centerInParent="true"
+            android:text="云端备份" />
+
+        <ImageView
+            android:id="@+id/back_cloudsave"
+            style="@style/tt_iv"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/title_im" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/cloudsave_save"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/adddevice_height"
+        android:layout_marginLeft="@dimen/adddevice_left"
+        android:layout_marginRight="@dimen/adddevice_left"
+        android:layout_marginTop="@dimen/cloudsave_height"
+        android:background="@drawable/btn_bg"
+        android:text="备份到云端"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/cloudsave_get"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/adddevice_height"
+        android:layout_marginLeft="@dimen/adddevice_left"
+        android:layout_marginRight="@dimen/adddevice_left"
+        android:layout_marginTop="@dimen/cloudsave_height"
+        android:background="@drawable/btn_bg"
+        android:text="获取云端的备份"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/cloudsave_set"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/adddevice_height"
+        android:layout_marginLeft="@dimen/adddevice_left"
+        android:layout_marginRight="@dimen/adddevice_left"
+        android:layout_marginTop="@dimen/cloudsave_height"
+        android:background="@drawable/btn_bg"
+        android:text="重置本APP的数据 "
+        android:textColor="@color/white" />
+
+</LinearLayout>

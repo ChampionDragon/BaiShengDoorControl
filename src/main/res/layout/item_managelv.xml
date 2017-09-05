@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="22dp"
+    android:paddingRight="22dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="22dp"
+    android:paddingTop="22dp" >
+
+    <ImageView
+        android:id="@+id/managelv_left"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/icon"
+        android:gravity="center_vertical" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="11dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/managelv_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="广告道闸" />
+
+        <TextView
+            android:id="@+id/managelv_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="10351135" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_marginRight="33dp"
+        android:id="@+id/managelv_set"
+        android:layout_width="@dimen/managelv_iv"
+        android:layout_height="@dimen/managelv_iv"
+        android:contentDescription="@string/app_name"
+        android:gravity="center_vertical"
+        android:src="@drawable/set" />
+    <ImageView
+        android:id="@+id/managelv_delete"
+        android:layout_width="@dimen/managelv_iv"
+        android:layout_height="@dimen/managelv_iv"
+        android:contentDescription="@string/app_name"
+        android:gravity="center_vertical"
+        android:src="@drawable/delete" />
+
+</LinearLayout>

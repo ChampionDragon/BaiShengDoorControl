@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.bs"
+          android:versionCode="1"
+          android:versionName="V1.0">
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="22"/>
+
+    <!--添加删除后台程序的权限-->
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
+
+
+    <!-- 将Dialog设置成系统级别的权限 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW"/>
+
+    <!-- WIFI相关权限 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+
+    <!-- 防止UDP不能发送广播而要创建WifiManager.MulticastLock所需对象的权限 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+
+    <!-- 使用摄像头的权限 -->
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+
+    <!-- 文件写入创建删除 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/> <!-- 读系统日志 -->
+
+
+    <!-- 照片权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <!-- PLD播放器权限 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/> <!-- 授权使用唤醒锁 -->
+    <!-- 访问CellID或WiFi,只要当前设备可以接收到基站的服务信号，便可获得位置信息 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <!-- 萤石摄像头 -->
+    <uses-permission android:name="android.permission.WRITE_OWNER_DATA"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/> <!-- 手电筒 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <!-- 收到消息时，让处理器不要睡眠。 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
+
+    <application
+        android:name=".base.BaseApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/wy"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".guide.Welcome"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".WebviewActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.UsermanagerActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.UserActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.AddDeviceActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".zxing.MipcaActivityCapture"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.DeviceControlActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.AutoScanActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.DeviceManager"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.CloudSaveActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.DeviceSet"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.TestActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.LogActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.SafeZoonActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.DeviceClientControlActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.UdpControlActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".guide.Guide"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".account.Login"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".account.Register"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".account.ResetPwd"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ControlActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.RefreshRecordActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ControlOneActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.WifiSetActivity"/>
+
+        <!-- 萤石摄像头 -->
+        <activity
+            android:name="com.videogo.main.EzvizWebViewActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Ezviz.act.EZCameraListActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Ezviz.act.AutoWifiConnectingActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Ezviz.act.AutoWifiNetConfigActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Ezviz.act.AutoWifiPrepareStepOneActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Ezviz.act.AutoWifiResetActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Ezviz.act.EZDeviceSettingActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Ezviz.act.EZMessageActivity2"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Ezviz.act.EZMessageImageActivity2"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Ezviz.act.EZRealPlayActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Ezviz.act.EZRemotePlayBackActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Ezviz.act.EZUpgradeDeviceActivity"/>
+        <activity
+            android:name=".Ezviz.act.ModifyDeviceNameActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Ezviz.act.PlayBackListActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="nosensor"/>
+        <activity
+            android:name=".Ezviz.act.SeriesNumSearchActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".Ezviz.zxing.CaptureActivity"
+            android:screenOrientation="portrait"/>
+
+        <receiver
+            android:name=".Ezviz.EzvizBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.videogo.action.ADD_DEVICE_SUCCESS_ACTION"/>
+                <action android:name="com.videogo.action.OAUTH_SUCCESS_ACTION"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+        <!-- 底部 -->
+
+
+        <!--
+        由于这个类继承了AppCompat,所以theme主题要属于这个类的一种，
+        不然报错:java.lang.IllegalStateException: You need to use a Theme.AppCompat theme
+        -->
+        <activity
+            android:name=".activity.SearchDeviceActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".activity.UpDateActivity"
+            android:screenOrientation="portrait"/>
+
+        <service android:name=".constant.UpdateService"/>
+
+        <activity android:name=".activity.AboutUsActivity"/>
+        <activity android:name=".activity.HelpActivity">
+        </activity>
+        <activity android:name=".activity.SetActivity">
+        </activity>
+    </application>
+
+</manifest>

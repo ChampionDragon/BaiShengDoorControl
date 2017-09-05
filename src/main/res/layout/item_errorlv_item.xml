@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="11dp"
+    android:paddingTop="11dp" >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="22dp"
+        android:src="@drawable/dot_press" />
+
+    <TextView
+        android:id="@+id/error_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="5dp"
+        android:text="8:42" />
+
+    <TextView
+        android:id="@+id/error_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="33dp"
+        android:layout_weight="1"
+        android:paddingLeft="55dp"
+        android:text="关门受阻" />
+
+    <ImageView
+        android:id="@+id/error_iv"
+        android:layout_width="0dp"
+        android:layout_height="22dp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:src="@drawable/right" />
+
+</LinearLayout>

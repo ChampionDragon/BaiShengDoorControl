@@ -33,6 +33,7 @@ public class DeviceSetAdapter extends BaseAdapter {
         super();
         this.context = context;
         this.list = list;
+
     }
 
     @Override

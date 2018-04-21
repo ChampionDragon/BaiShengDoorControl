@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <RelativeLayout
         style="@style/tt"
-        android:layout_width="match_parent" >
+        android:layout_width="match_parent">
 
         <TextView
             style="@style/tt_tv"
             android:layout_centerInParent="true"
-            android:text="设备管理" />
+            android:text="设备管理"/>
 
         <ImageView
             android:id="@+id/back_manage"
             style="@style/tt_iv"
             android:layout_alignParentLeft="true"
-            android:background="@drawable/title_im" />
+            android:background="@drawable/title_im"/>
     </RelativeLayout>
 
     <ListView
@@ -26,29 +26,29 @@
         android:layout_height="0dp"
         android:layout_weight="4"
         android:divider="@color/gray_shallow"
-        android:dividerHeight="2dp" >
+        android:dividerHeight="2dp">
     </ListView>
 
     <ImageView
         android:id="@+id/manage_add"
-        android:background="@drawable/addmanage_bg"
-        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="44dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/addmanage" />
+        android:layout_marginTop="15dp"
+        android:background="@drawable/addmanage_bg"
+        android:src="@drawable/addmanage"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2" >
+        android:layout_weight="2">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="77dp"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/manage_open"
@@ -58,7 +58,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/btn_open"
                 android:text="批量开启"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"/>
 
             <Button
                 android:id="@+id/manage_close"
@@ -68,7 +68,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/btn_close"
                 android:text="批量关闭"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"/>
 
             <Button
                 android:id="@+id/manage_pause"
@@ -78,7 +78,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/btn_pause"
                 android:text="批量暂停"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"/>
         </LinearLayout>
     </RelativeLayout>
 

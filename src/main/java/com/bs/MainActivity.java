@@ -38,6 +38,7 @@ import com.bs.fragment.MenuleftFragment;
 import com.bs.slidelibrary.SlidingFragmentActivity;
 import com.bs.slidelibrary.SlidingMenu;
 import com.bs.util.DialogCustomUtil;
+import com.bs.util.DialogLoading;
 import com.bs.util.DialogNotileUtil;
 import com.bs.util.Logs;
 import com.bs.util.SmallUtil;
@@ -78,12 +79,15 @@ public class MainActivity extends SlidingFragmentActivity implements
     private SwipeRefreshLayout refresh;// 下拉刷新列表
     private Dialog dialog;
 
+    int load;
+    DialogLoading dialogLoading;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
          /*设置成透明导航栏和透明状态栏*/
-        SmallUtil.setScreen(this);
+//        SmallUtil.setScreen(this);
         initView();
         initRefresh();
         initDb();
@@ -95,6 +99,12 @@ public class MainActivity extends SlidingFragmentActivity implements
         lv.setOnScrollListener(onScrollListener);
         connectDevice();
         lv.setOnItemClickListener(itemlistener);
+        test();
+    }
+
+    private void test() {
+//        dialogLoading = new DialogLoading(this);
+//        dialogLoading.show();
     }
 
 
@@ -212,9 +222,10 @@ public class MainActivity extends SlidingFragmentActivity implements
      * 扫描含有BSMK字符串的ssid
      */
     private List<ScanResult> getfilterList(List<ScanResult> wifiList) {
-        List<ScanResult> list = new ArrayList<ScanResult>();
+        List<ScanResult> list = new ArrayList<>();
         for (int i = 0; i < wifiList.size(); i++) {
             ScanResult scanResult = wifiList.get(i);
+
             if ((scanResult.SSID).indexOf("BSMK") != -1) {
                 list.add(scanResult);
             }
@@ -276,7 +287,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 
         SlidingMenu menu = getSlidingMenu();
         // menu出现的位置
-        menu.setMode(SlidingMenu.LEFT);
+        menu.setMode(SlidingMenu.LEFT_RIGHT);
         // 设置触摸屏幕的模式
         menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
         // 设置旁边阴影的宽度
@@ -289,7 +300,17 @@ public class MainActivity extends SlidingFragmentActivity implements
         menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
         // 设置渐入渐出效果的值
         menu.setFadeDegree(0.88f);
+        //设置滑动时菜单是否渐入渐出效果
+        menu.setFadeEnabled(true);
+        //设置滑动时的拖拽效果
+        menu.setBehindScrollScale(0.333f);
 
+        /*设置右边（二级）侧滑菜单*/
+        Fragment rightMenuFragment = new MenuleftFragment();
+        menu.setSecondaryMenu(R.layout.menu_right_frame);
+        menu.setSecondaryShadowDrawable(R.drawable.shadow_menu);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.id_menu_right, rightMenuFragment).commit();
     }
 
     /**
@@ -319,8 +340,8 @@ public class MainActivity extends SlidingFragmentActivity implements
      * 除去第一个和最后一个imageview，其他的imageview依次设置相应的图片，顺序与imgs里的一样
      * 最后再把第一个imageview的图片设置为imgs中的最后一张图片
      * ，把最后一个imageview的图片设置为imgs中的第一张图片（因为向做滑动到第一张时
-     * ，再向左滑动就到了最后一张；向右滑动一样，到了最后一张，再向右滑动就到了第一张） 比如：要显示的图片为： A B C
-     * D四张图片，此时我们要把它们构造成： D {A B C D}A
+     * ，再向左滑动就到了最后一张；向右滑动一样，到了最后一张，再向右滑动就到了第一张）
+     * 比如：要显示的图片为： A B C D四张图片，此时我们要把它们构造成： D {A B C D}A
      * 中间大括号里的就是要显示的图片，第一个D和最后一个A就是滑动到头时继续再滑动时逻辑上要展示的图片
      */
     private void setImgRes(int length) {
@@ -373,7 +394,7 @@ public class MainActivity extends SlidingFragmentActivity implements
         @Override
         public void onPageSelected(int position) {
             currentIndex = position;// 把当前页的索引记住，方便跳转到下一页（这是必须的）
-            if (currentIndex != 4) {
+            if (currentIndex != imgsize - 1 && currentIndex != 0) {
                 setCurrentDot(currentIndex);
             }
             // Log.d(tag, "main278   " + currentIndex);
@@ -386,7 +407,7 @@ public class MainActivity extends SlidingFragmentActivity implements
          * ）。如果再这里不做相应的处理，再向左滑动就滑不动了，因为已经到了viewpager的第一张
          * （索引为0），此时我们就要依靠参数arg1的值来判断是否已经完成了滑动到第一张
          * ，当arg1的值为0.0时，即已经滑动完成，此时我们就把viewpager的页面跳转到viewpager的倒数第二张页面上
-         * ，使用setcurrentItem
+         * ，使用setcurrentItem   D{A B C D}A
          * （Int,boolean）方法,当Boolean取值为FALSE时，就没有滑动效果，直接跳转过去，由于当前页的图片和要跳转到的页面一样
          * ，所以在视觉效果上看不出闪烁 ，这样就很自然的跳转到了倒数第二张，然后继续向左滑动
          */
@@ -416,17 +437,19 @@ public class MainActivity extends SlidingFragmentActivity implements
         public void run() {
             currentIndex++;
             handler.obtainMessage().sendToTarget();
+//            load += 5;
         }
     }
 
     private Handler handler = new Handler() {
-
         public void handleMessage(Message msg) {
             // 使viewpager跳转到指定页（true:带有滑动效果）
             vp.setCurrentItem(currentIndex, true);
+//            dialogLoading.setTv(load + "");
+//            if (load == 100) {
+//                dialogLoading.close();
+//            }
         }
-
-        ;
     };
 
     @Override

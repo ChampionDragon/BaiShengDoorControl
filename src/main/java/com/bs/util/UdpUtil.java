@@ -20,11 +20,19 @@ import java.net.UnknownHostException;
 
 public class UdpUtil {
     private static DatagramSocket dSocket;
-    private static InetAddress inetAddress;
+    private static InetAddress inetAddress;//表示互联网协议（IP）地址
     private static WifiManager.MulticastLock lock = BaseApplication.lock;
 
+    /**
+     * @param ip 服务器ip地址
+     * @param port  服务器端口号
+     * @param data  发送数据的字节数组
+     * @return  服务器返回的字符串
+     */
+    /*向服务器发送数据*/
     public static String Send(String ip, int port, byte[] data) {
         try {
+            //在给定主机名的情况下确定主机的IP地址,如果参数为null,获得的是本机的IP地址
             inetAddress = InetAddress.getByName(ip);
         } catch (UnknownHostException e) {
             e.printStackTrace();
@@ -33,13 +41,13 @@ public class UdpUtil {
         try {
             dSocket = new DatagramSocket();
             dSocket.setSoTimeout(10000);// 如果对方连接状态10秒没有收到数据的话强制断开客户端
-
         } catch (SocketException e) {
             e.printStackTrace();
             Logs.i("udputil 32    " + e);
         }
-        DatagramPacket dPacket = new DatagramPacket(data, data.length,
-                inetAddress, port);
+        // 创建一个DatagramPacket对象，用于发送数据。
+        // 参数一：要发送的数据 参数二：数据的长度 参数三：服务端的网络地址 参数四：服务器端端口号
+        DatagramPacket dPacket = new DatagramPacket(data, data.length, inetAddress, port);
         try {
             dSocket.send(dPacket);
             Logs.i(dPacket.getAddress() + "  udputil 45  " + dPacket.getPort());
@@ -52,6 +60,7 @@ public class UdpUtil {
         return s;
     }
 
+    /*从服务器接收数据*/
     private static String Recevice() {
         String result = "NO RESPONSE";
         byte[] dataRec = new byte[66];
@@ -83,7 +92,6 @@ public class UdpUtil {
      */
     public static String ServerSend(byte[] data) {
         return Send(Constant.serverIP, Constant.serverPort, data);
-
     }
 
 

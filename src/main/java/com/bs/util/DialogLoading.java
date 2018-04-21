@@ -13,13 +13,14 @@ import com.bs.view.CircularRing;
 
 /**
  * 小滚轮加载Dialog
- * 作者
+ * 作者:Champion Dragon
  * created at 2017/6/19
  **/
 
 public class DialogLoading {
     CircularRing mLoadingView;
     Dialog mLoadingDialog;
+    TextView loadingText;
     public DialogLoading(Context context) {
         this(context, "正在加载");
     }
@@ -33,7 +34,7 @@ public class DialogLoading {
         // 页面中的LoadingView
         mLoadingView = (CircularRing) view.findViewById(R.id.lv_circularring);
         // 页面中显示文本
-        TextView loadingText = (TextView) view.findViewById(R.id.loading_text);
+        loadingText= (TextView) view.findViewById(R.id.loading_text);
         // 显示文本
         loadingText.setText(msg);
         // 创建自定义样式的Dialog
@@ -45,6 +46,9 @@ public class DialogLoading {
                 LinearLayout.LayoutParams.MATCH_PARENT));
     }
 
+    public void setTv(String s){
+        loadingText.setText(s);
+    }
     public void show() {
         if (mLoadingDialog != null) {
             mLoadingDialog.show();

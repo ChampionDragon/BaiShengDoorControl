@@ -141,10 +141,6 @@ public class DbManager {
 
 
 
-
-
-
-
 	/* 有关设备报错数据库操作 */
 
 

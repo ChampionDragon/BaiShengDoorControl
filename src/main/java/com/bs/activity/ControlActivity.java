@@ -47,12 +47,10 @@ public class ControlActivity extends BaseActivity implements OnClickListener {
     private long first;
     private String strSSID;
     private WifiInfo wifiInfo;
-
     private int seq;// 随机数
     private int cmd;// 指令1：OPEN ,CLOSE:0，STOP:2
     private String cmdStr;
     private String DeviceID;
-
     private TextView malfunction, unusual, state;
     private Button open, pause, close;
     private ImageView log, safe;
@@ -130,8 +128,8 @@ public class ControlActivity extends BaseActivity implements OnClickListener {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             DeviceID = extras.getString("id");
-        }else{
-            DeviceID=Constant.idFOUR;
+        } else {
+            DeviceID = Constant.idFOUR;
         }
         initView();
         initAnim();
@@ -191,15 +189,12 @@ public class ControlActivity extends BaseActivity implements OnClickListener {
                 finish();
                 break;
             case R.id.control_monitor:
-
                 String token = BaseApplication.sp.getString("萤石摄像头的秘钥");
                 Logs.d("controlActivity194  " + token);
                 BaseApplication.getOpenSDK().setAccessToken(token);
                 Intent toIntent = new Intent(this, EZCameraListActivity.class);
                 toIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toIntent);
-
-
                 break;
             case R.id.control_close:
                 close();

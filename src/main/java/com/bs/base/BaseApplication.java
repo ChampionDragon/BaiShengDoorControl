@@ -22,6 +22,7 @@ import okhttp3.OkHttpClient;
 public class BaseApplication extends Application {
     private static BaseApplication mInstance = null;
     public static Context context;
+    public static String mServerUrl="http://s.tingchebao.com/zld/";//停车宝服务器地址
     public static SpUtil sp;
     public static WifiManager.MulticastLock lock;
     public static WifiManager wfm;
@@ -48,7 +49,7 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         if (activityStack == null) {
-            activityStack = new Stack<Activity>();
+            activityStack = new Stack<>();
         }
         mInstance = this;
         context = getApplicationContext();
@@ -56,6 +57,7 @@ public class BaseApplication extends Application {
         initUDP();
         initOkHttp();
         initEzviz();
+        /*初始化RequestQueue*/
         queue = Volley.newRequestQueue(context);
     }
 
@@ -92,8 +94,6 @@ public class BaseApplication extends Application {
          * APP_KEY请替换成自己申请的
          */
         EZOpenSDK.initLib(this, AppKey, "");
-
-
     }
 
 

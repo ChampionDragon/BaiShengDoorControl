@@ -15,8 +15,7 @@ public class Constant {
 
 
     /*更新APK的网址*/
-    public final static String apkUpdate="http://releases.b0.upaiyun.com/hoolay.apk";
-
+    public final static String apkUpdate = "http://releases.b0.upaiyun.com/hoolay.apk";
 
 
     /* 网络 */
@@ -26,15 +25,13 @@ public class Constant {
             "https://baishengjj.tmall.com/";
     public final static String urlBaiShengtaobao =
 //        "http://blog.csdn.net/dodod2012/article/details/51425369";
-"https://shop128145782.taobao.com/category-1128776305.htm?spm=a1z10.1-c.w5002-11821265594.17.1d548095HK59uM&search=y&catName=%BF%AA%C3%C5%B5%E7%BB%FA";
+            "https://shop128145782.taobao.com/category-1128776305.htm?spm=a1z10.1-c.w5002-11821265594.17.1d548095HK59uM&search=y&catName=%BF%AA%C3%C5%B5%E7%BB%FA";
 
 
     /* 设备连接 */
-    public final static String serverIP =
-            "120.203.0.218";
+    public final static String serverIP = "120.203.0.218";
     //      "116.62.180.134";
-    public final static int serverPort
-          = 30066;
+    public final static int serverPort = 30066;
 //        = 30000;
 
     public final static int ipPort = 30099;
@@ -65,7 +62,7 @@ public class Constant {
     /* 登录模块 */
     public final static String urlLogin = //登录
             "http://www.bsznyun.com/wifi/ios/get_user_ios.php";
-//            "http://www.bsznyun.com/wifi/get_user_ios.php";
+    //            "http://www.bsznyun.com/wifi/get_user_ios.php";
     public final static String key = "5tZwmk3TIaJ4ELVHzN";//加密钥匙
     public final static String mobile = "http://116.62.180.134/simplewind/Core/Library/Vendor/alidayu/sendmsg-ios.php";//短信
     public final static String register = "http://www.bsznyun.com/wifi/register_user_mobi.php";//注册

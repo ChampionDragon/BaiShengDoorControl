@@ -39,7 +39,7 @@ public class UpdateService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        //Return the communication channel to the service.
+        //将通信通道返回给服务
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -64,7 +64,7 @@ public class UpdateService extends Service {
                 .setSmallIcon(R.drawable.ad3)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ad2))
                 //自定义通知的提示音
-//               .setSound(Uri.parse("android.resource://com.lcb/" + R.raw.timeout));
+//              .setSound(Uri.parse("android.resource://com.lcb/" + R.raw.timeout));
                 //设置系统默认声音
                 .setDefaults(Notification.DEFAULT_SOUND);
     }
@@ -182,7 +182,7 @@ public class UpdateService extends Service {
 //        builder.setContentInfo("下载进度  " + progress + "%");
         builder.setAutoCancel(true);
         builder.setWhen(System.currentTimeMillis());
-        builder.setContentText(msg);
+        builder.setContentText(msg);//左边的文字
         if (progress >= 100) {
 //            下载完成
             builder.setContentIntent(getInstallIntent());
@@ -200,7 +200,7 @@ public class UpdateService extends Service {
 //            下载进行中
             msgBuilder.setProgress(100, progress, false);
         }
-        msgBuilder.setContentInfo("下载进度  " + progress + "%");
+        msgBuilder.setContentInfo(progress + "%");//右边的文字
         notification = msgBuilder.build();
         manager.notify(0, notification);
     }
@@ -216,6 +216,7 @@ public class UpdateService extends Service {
         //系统自带安装程序
         //Uri uri = Uri.fromFile(file);和Uri.parse("file://" + file.getAbsolutePath())相同
         intent.setDataAndType(Uri.parse("file://" + file.getAbsolutePath()), "application/vnd.android.package-archive");
+
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         return pendingIntent;
     }

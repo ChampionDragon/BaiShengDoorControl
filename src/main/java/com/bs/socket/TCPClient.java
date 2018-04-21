@@ -16,7 +16,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class TCPClient {
-	private String serverIpAddress = "localhost";
+    private String serverIpAddress = "localhost";
     private int serverPort = 6000;
     private Socket dSocket = null;
     private String msg = "";
@@ -32,7 +32,6 @@ public class TCPClient {
 
     public TCPClient(String msg) {
         super();
-
         this.msg = msg;
     }
 
@@ -95,7 +94,6 @@ public class TCPClient {
             }
 
         }
-
         return sb.toString();
     }
 

@@ -13,10 +13,12 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 /**
- * Created by Administrator on 2017/6/19.
- */
+ * Description: 自定义小滚轮
+ * AUTHOR: Champion Dragon
+ * created at 2018/4/20
+ **/
 
-public class CircularRing extends View{
+public class CircularRing extends View {
     private float mWidth = 0f;
     private float mPadding = 0f;
     private float startAngle = 0f;
@@ -95,10 +97,8 @@ public class CircularRing extends View{
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
-
                 float value = (float) valueAnimator.getAnimatedValue();
                 startAngle = 360 * value;
-
                 invalidate();
             }
         });

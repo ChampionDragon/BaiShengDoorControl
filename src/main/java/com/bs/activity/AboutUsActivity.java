@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.bs.R;
 import com.bs.base.BaseActivity;
+import com.bs.util.SmallUtil;
 import com.bs.util.SystemUtil;
 
 public class AboutUsActivity extends BaseActivity {
@@ -27,7 +28,12 @@ public class AboutUsActivity extends BaseActivity {
         });
         tv = (TextView) findViewById(R.id.aboutus_tv);
         tv.setText("百胜智控" + SystemUtil.VersionName());
-
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SmallUtil.getActivity(AboutUsActivity.this, CodeCreateActivity.class);
+            }
+        });
 
     }
 

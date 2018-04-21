@@ -127,7 +127,7 @@ public class TestActivity extends BaseActivity {
                     Constant.cformatD);
             boolean b = key.equals(data);
             if (!b) {
-                deviceBeans = new ArrayList<ControlBean>();
+                deviceBeans = new ArrayList<>();
                 key = data;
             }
             deviceBeans.add(bean);

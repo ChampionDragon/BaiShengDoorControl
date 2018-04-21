@@ -100,7 +100,8 @@ public class SmallUtil {
         }
         String returnStr = "";// 返回的字符串
         if (charsetName == null) {
-            // 编译器默认解码指定的 byte 数组，构造一个新的 String
+            // 编译器默认解码指定的 byte 数组，构造一个新的 String,
+            // 比如我的集成开发工具即编码器android studio的默认编码格式为"utf-8"
             returnStr = new String(bytes);
         } else {
             // 指定的 charset 解码指定的 byte 数组，构造一个新的 String
@@ -242,8 +243,8 @@ public class SmallUtil {
      *
      * @param father 原字符串长度
      * @param index  所要字符串之前的字符串 id:
-     * @param length 所需要字符串的长度  BDYYIJG
-     *               比如"small:sada  id:BDYYIJG"
+     * @param length 所需要字符串的长度  BDYYIJG=7
+     *               比如"small:sada  id:BDYYIJG" 结果BDYYIJG
      */
     public static String getPartString(String father, String index, int length) {
         String children = "";
@@ -291,6 +292,19 @@ public class SmallUtil {
         }
         return false;
     }
+    /*判断文件是否存在*/
+    public static boolean fileIsExists(String strFile) {
+        try {
+            File f = new File(strFile);
+            if (!f.exists()) {
+                return false;
+            }
 
+        } catch (Exception e) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

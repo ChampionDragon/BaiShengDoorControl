@@ -1,10 +1,5 @@
 package com.bs.activity;
 
-import static com.bs.socket.TCPServer.TCPSERVER_CLIENT_DISCONNECTED;
-
-import java.util.Arrays;
-import java.util.Random;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -33,6 +28,11 @@ import com.bs.socket.TCPServer;
 import com.bs.util.DialogNotileUtil;
 import com.bs.util.SmallUtil;
 import com.bs.util.SpUtil;
+
+import java.util.Arrays;
+import java.util.Random;
+
+import static com.bs.socket.TCPServer.TCPSERVER_CLIENT_DISCONNECTED;
 
 public class DeviceControlActivity extends BaseActivity {
 	private TCPServer tcpServer = null;
@@ -155,7 +155,6 @@ public class DeviceControlActivity extends BaseActivity {
 			// String sasa = SmallUtil.hexStr2Str(aa);
 			// Log.w("long",aa);
 			// Log.i("long",sasa);
-
 			tcpServer.sendData(packet, packet.length);
 		}
 	};

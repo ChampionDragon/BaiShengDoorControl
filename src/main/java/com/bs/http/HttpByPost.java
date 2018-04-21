@@ -19,6 +19,7 @@ public class HttpByPost {
         try {
             url = new URL(urlStr);
             connection = (HttpURLConnection) url.openConnection();
+            connection.setConnectTimeout(3000);
             connection.setDoInput(true);
             connection.setDoOutput(true);
             connection.setRequestMethod("POST");
@@ -26,22 +27,19 @@ public class HttpByPost {
                     "application/x-www-form-urlencoded");
             connection.setRequestProperty("Charset", "utf-8");
             connection.setRequestProperty("connection", "Keep-Alive");
-            connection.setRequestProperty("User-Agent",
-                    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 3.0.04506;SV1)");
+//          connection.setRequestProperty("User-Agent",
+//          "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 3.0.04506;SV1)");
             connection.setRequestProperty("accept", "*/*");
 
             int responseCode = connection.getResponseCode();
             String responseMessage = connection.getResponseMessage();
-            Logs.d("httppost38     code: " + responseCode + "     msg:  "
-                    + responseMessage);
+            Logs.d("httppost38     code: " + responseCode + "     msg:  " + responseMessage);
 
             pw = new PrintWriter(connection.getOutputStream());
             pw.print(data);
             pw.flush();
-
             in = new InputStreamReader(connection.getInputStream());
-            Logs.w(in.toString() + "    "
-                    + connection.getInputStream().toString());
+            Logs.w(in.toString() + "    " + connection.getInputStream().toString());
             BufferedReader bufferedReader = new BufferedReader(in);
             StringBuffer strBuffer = new StringBuffer();
             String line = null;
@@ -51,7 +49,7 @@ public class HttpByPost {
             result = strBuffer.toString();
         } catch (Exception e) {
             e.printStackTrace();
-            Logs.d("httppost57   " + e);
+            Logs.e("httppost57   " + e);
         } finally {
             if (connection != null) {
                 connection.disconnect();

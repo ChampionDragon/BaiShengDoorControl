@@ -21,6 +21,7 @@ import com.bs.base.BaseActivity;
 import com.bs.base.BaseApplication;
 import com.bs.constant.Constant;
 import com.bs.constant.SpKey;
+import com.bs.http.HttpByPost;
 import com.bs.util.DialogNotileUtil;
 import com.bs.util.Logs;
 import com.bs.util.MD5;
@@ -32,8 +33,13 @@ import com.bs.util.ToastUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 
 public class Login extends BaseActivity implements OnClickListener {
     private EditText phone, psw;
@@ -41,8 +47,8 @@ public class Login extends BaseActivity implements OnClickListener {
     private Button login, register;
     private static final int LOGIN = 0;
     private static final int LOGIN_FAIL = 1;
-    private String url;
     private SpUtil sp;
+    private String url, urlTest = "http://192.168.10.217:8888/SSM/loginajax.do";
 
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -74,11 +80,7 @@ public class Login extends BaseActivity implements OnClickListener {
         if (!netConnect) {
             DialogNotileUtil.show(this, "请先将网络打开");
         }
-
-
-        Logs.d("login 77  " + sp.getBoolean(SpKey.isLogin));
-
-
+//        Logs.d("login 77  " + sp.getBoolean(SpKey.isLogin));
     }
 
     private void initView() {
@@ -100,7 +102,9 @@ public class Login extends BaseActivity implements OnClickListener {
                 BaseApplication.getInstance().exitApp();
                 break;
             case R.id.login_login:
-                loginCheck();
+//                loginCheck();
+//                  login();
+                okHttpLogin();
                 break;
             case R.id.login_register:
                 SmallUtil.getActivity(Login.this, Register.class);
@@ -110,6 +114,87 @@ public class Login extends BaseActivity implements OnClickListener {
                 break;
         }
     }
+
+    /*   ++++++++++++++++++++++++++++++++  测试后台  +++++++++++++++++++++++++++++++++++++   */
+    private void login() {
+        String name = phone.getText().toString();
+        String pwd = psw.getText().toString();
+        final JSONObject jb = new JSONObject();
+        try {
+            jb.put("username", name);
+            jb.put("password", pwd);
+        } catch (JSONException e) {
+            Logs.d("127  " + e);
+        }
+        executor.submit(new Runnable() {
+            @Override
+            public void run() {
+                //通过post方法传输jsonobject数据
+//                JsonObjectRequest JsonObjectRequest = new JsonObjectRequest(Request.Method.POST, urlTest, jb,
+//                        new Response.Listener<JSONObject>() {
+//                            @Override
+//                            public void onResponse(JSONObject jsonObject) {
+//                                Logs.d("127"+ jsonObject.toString());
+//                            }
+//                        }, new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Logs.e("142  " + error.toString());
+//                    }
+//                });
+//                BaseApplication.queue.add(JsonObjectRequest);
+                String s = HttpByPost.executeHttpPost(jb.toString(), urlTest);
+                Logs.d(s + "   149");
+            }
+        });
+    }
+
+
+    public void okHttpLogin() {
+        executor.submit(new Runnable() {
+            @Override
+            public void run() {
+                /*数据类型*/
+                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+            /*申明给服务端传递一个json串*/
+                String name = phone.getText().toString();
+                String pwd = psw.getText().toString();
+                final JSONObject jb = new JSONObject();
+                try {
+                    jb.put("username", name);
+                    jb.put("password", pwd);
+                    Logs.v("168 " + jb.toString());
+                } catch (JSONException e) {
+                    Logs.d("127  " + e);
+                }
+                //创建一个OkHttpClient对象
+                OkHttpClient okHttpClient = new OkHttpClient();
+                //创建一个RequestBody(参数1：数据类型 参数2传递的json串)
+                RequestBody requestBody = RequestBody.create(JSON, jb.toString());
+                //创建一个请求对象
+                okhttp3.Request request = new okhttp3.Request.Builder()
+                        .url(urlTest)
+                        .post(requestBody)
+                        .build();
+
+                //发送请求获取响应
+                try {
+                    okhttp3.Response response = okHttpClient.newCall(request).execute();
+                    //判断请求是否成功
+                    if (response.isSuccessful()) {
+                        //打印服务端返回结果
+                        Logs.i("185   " + response.body().string() + "  " + jb.toString());
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Logs.e("192  " + e.toString());
+                }
+            }
+        });
+    }
+
+    /*  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   */
+
 
     private void loginCheck() {
         String phoneStr = phone.getText().toString();

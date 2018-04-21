@@ -74,12 +74,10 @@ public class LoadViewDevice {
 //                bean.setOnline(true);
 //            }
 //        }
-
-
     }
 
 
-    // ==================使用AsyncTask====================
+//     ======================================使用AsyncTask==================================
     private class NewsAsyncTask extends AsyncTask<DeviceBean, Void, String> {
 
         @Override
@@ -105,7 +103,6 @@ public class LoadViewDevice {
 //            Character a='0';
 //            char c = s.charAt(1);
 //            Logs.d("LoadViewDevice108   "+c+"    "+a.equals(c));
-
 
 
             addToCache(ID, s);

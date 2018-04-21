@@ -140,7 +140,7 @@ public class LogActivity extends BaseActivity implements OnClickListener {
      * 过滤数据
      */
     private List<DeviceManagerBean> getData(List<ControlBean> list) {
-        Map<String, List<ControlBean>> map = new LinkedHashMap<String, List<ControlBean>>();
+        Map<String, List<ControlBean>> map = new LinkedHashMap<>();
         String key = "";
         List<ControlBean> deviceBeans = null;
         List<DeviceManagerBean> deviceManagerBeans = new ArrayList<>();
@@ -150,7 +150,7 @@ public class LogActivity extends BaseActivity implements OnClickListener {
                     Constant.cformatD);
             boolean b = key.equals(data);
             if (!b) {
-                deviceBeans = new ArrayList<ControlBean>();
+                deviceBeans = new ArrayList<>();
                 key = data;
             }
             deviceBeans.add(bean);

@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "25.0.1"
+    buildToolsVersion "27.0.2"
 
     defaultConfig {
         applicationId "com.bs"
@@ -25,14 +25,11 @@ android {
     }
 
 /*将.so文件变成jar包*/
-//
 //    sourceSets {
 //        main {
 //            jniLibs.srcDirs = ['libs']
 //        }
 //    }
-
-
 }
 
 dependencies {

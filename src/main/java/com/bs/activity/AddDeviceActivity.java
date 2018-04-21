@@ -38,7 +38,7 @@ import org.json.JSONObject;
  * @date 2017-5-5
  */
 public class AddDeviceActivity extends BaseActivity implements OnClickListener {
-    private final static int SCANNIN_GREQUEST_CODE = 1;
+    private final static int SCANNIN_GREQUEST_CODE =5;
     private ImageView ivTwocode, ivManual, ivAuto, back;
     private LinearLayout twocode, manual, auto, id;
     private EditText etId;
@@ -48,7 +48,6 @@ public class AddDeviceActivity extends BaseActivity implements OnClickListener {
     private static final int CHECKID = 0;
     private static final int CHECKID_FAIL = 1;
     private SoundPoolUtil mSoundPoolUtil;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,8 +131,7 @@ public class AddDeviceActivity extends BaseActivity implements OnClickListener {
                 switch (choose) {
                     case 0:
                         Intent intent = new Intent();
-                        intent.setClass(AddDeviceActivity.this,
-                                MipcaActivityCapture.class);
+                        intent.setClass(AddDeviceActivity.this, MipcaActivityCapture.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivityForResult(intent, SCANNIN_GREQUEST_CODE);
                         break;
@@ -164,7 +162,9 @@ public class AddDeviceActivity extends BaseActivity implements OnClickListener {
             @Override
             public void run() {
                 String url = Constant.checkId + HttpByGet.get("id", idStr);
+                Logs.v("发送的内容："+url);
                 String result = HttpByGet.executeHttpGet(url);
+                Logs.e("设备是否存在的返回结果:" + result);
                 result = result.replace("(", "").replace(")", "");
                 Response(result);
             }
@@ -185,14 +185,12 @@ public class AddDeviceActivity extends BaseActivity implements OnClickListener {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         if (ret.equals("fail")) {
             mHandler.sendEmptyMessage(CHECKID_FAIL);
         }
         if (ret.equals("ok")) {
             mHandler.sendEmptyMessage(CHECKID);
         }
-
     }
 
     Handler mHandler = new Handler() {
@@ -203,15 +201,13 @@ public class AddDeviceActivity extends BaseActivity implements OnClickListener {
                 case CHECKID:
                     DbManager dbManager = DbManager.getmInstance(AddDeviceActivity.this, Constant.dbDiveceBsmk, Constant.dbVersion);
                     DeviceBean device = dbManager.getDevice(idStr);
-                    Logs.e(device.getName()+device.getAddress()+device.getCreateTime());
+                    Logs.e(device.getName() + device.getAddress() + device.getCreateTime());
                     boolean b = dbManager.addOrUpdateDevice(idStr, device.getName(), device.getAddress(), device.getCreateTime());
                     if (b) {
                         ToastUtil.showLong("添加或更新设备成功");
                     }
-//                    finish();
 
-                    Intent intent = new Intent(AddDeviceActivity.this,
-                            WifiSetActivity.class);
+                    Intent intent = new Intent(AddDeviceActivity.this, WifiSetActivity.class);
                     intent = intent.putExtra(Constant.deviceId, idStr);
                     startActivity(intent);
                     finish();
@@ -223,10 +219,11 @@ public class AddDeviceActivity extends BaseActivity implements OnClickListener {
                     RelativeSizeSpan relativeSizeSpan = new RelativeSizeSpan(1.5f);//设置字体大小
                     RelativeSizeSpan relativeSizeSpan1 = new RelativeSizeSpan(1.3f);//设置字体大小
                     ForegroundColorSpan colorSpan = new ForegroundColorSpan(getResources().getColor(R.color.red));//设置颜色
+                    ForegroundColorSpan blackSpan = new ForegroundColorSpan(getResources().getColor(R.color.black));//设置颜色
                     spannableString.setSpan(relativeSizeSpan1, 9, idStr.length() + 9, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
                     spannableString.setSpan(colorSpan, 9, idStr.length() + 9, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
                     spannableString.setSpan(relativeSizeSpan, 0, 4, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-
+                    spannableString.setSpan(blackSpan, 0, 4, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
                     DialogNotileUtil.show(AddDeviceActivity.this, spannableString);
                     break;
 
@@ -247,7 +244,6 @@ public class AddDeviceActivity extends BaseActivity implements OnClickListener {
                     String str = bundle.getString("result");
                     dialog = DialogCustomUtil.create("二维码返回的结果", str,
                             AddDeviceActivity.this, new OnClickListener() {
-
                                 @Override
                                 public void onClick(View v) {
                                     dialog.dismiss();

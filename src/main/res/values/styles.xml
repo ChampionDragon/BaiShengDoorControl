@@ -57,7 +57,7 @@
         <item name="android:layout_marginLeft">6dp</item>
     </style>
 
-    <!-- Dialog样式 -->
+    <!-- Dialog样式 android:Theme.Dialog这个不添加Dialog会有阴影-->
     <style name="dialog" parent="android:Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <!-- Dialog的windowFrame框为无 -->

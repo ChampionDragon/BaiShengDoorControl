@@ -35,10 +35,10 @@ import java.io.IOException;
 
 public class UserActivity extends BaseActivity implements OnClickListener {
     private TextView photo, look;
+    private Button cancle;
     private EditText company, name, position;
     private RoundImageView head;
     private PopupWindow popupWindow;
-    private Button cancle;
     private File fileHead = new File(Constant.fileDir, Constant.filehead);
     private File fileTemp = new File(Constant.fileDir, Constant.filehead_temp);
     private static final int looking = 1;
@@ -58,7 +58,6 @@ public class UserActivity extends BaseActivity implements OnClickListener {
         mkdir();
         initHead();
         company.setAnimation(AnimationUtils.loadAnimation(this, R.anim.popup_enter));
-
     }
 
     /**
@@ -91,6 +90,7 @@ public class UserActivity extends BaseActivity implements OnClickListener {
         popupWindow = new PopupWindow(popView,
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT);
+
         popupWindow.setAnimationStyle(R.style.PopupAnimation); // 设置弹出动画
         ColorDrawable colorDrawable = new ColorDrawable(getResources()
                 .getColor(R.color.transparent));
@@ -98,7 +98,6 @@ public class UserActivity extends BaseActivity implements OnClickListener {
         // popupWindow.setBackgroundDrawable(new BitmapDrawable(
         // getApplicationContext().getResources(), Bitmap.createBitmap(1,
         // 1, Bitmap.Config.ARGB_8888)));
-
         popupWindow.setFocusable(true);// 设置PopupWindow可获得焦点
         popupWindow.setOutsideTouchable(true);// PopupWindow以外的区域是否可点击,点击后是否会消失。
         cancle = (Button) popView.findViewById(R.id.btn_cancle);
@@ -109,7 +108,6 @@ public class UserActivity extends BaseActivity implements OnClickListener {
         look.setOnClickListener(this);
         // popupWindow消失时监听
         popupWindow.setOnDismissListener(new OnDismissListener() {
-
             @Override
             public void onDismiss() {
                 backgroundAlpaha(UserActivity.this, 1.0f);
@@ -152,14 +150,18 @@ public class UserActivity extends BaseActivity implements OnClickListener {
                 popupWindow.dismiss();// popwindow消失
                 break;
             case R.id.photo_ing:
+                //启动系统的拍照功能
                 Intent takephoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                //新建个.jpg文件存放拍照出来的图片
                 uriTemp = Uri.fromFile(new File(fileTemp, "临时.jpg"));
                 takephoto.putExtra(MediaStore.EXTRA_OUTPUT, uriTemp);
                 startActivityForResult(takephoto, photoing);
                 popupWindow.dismiss();
                 break;
             case R.id.photo_look:
+                //启动系统给的查询照片功能
                 Intent pic = new Intent(Intent.ACTION_GET_CONTENT);
+                //设置成所有照片类型
                 pic.setType("image/*");
                 startActivityForResult(pic, looking);
                 popupWindow.dismiss();
@@ -175,6 +177,7 @@ public class UserActivity extends BaseActivity implements OnClickListener {
         View rootView = findViewById(R.id.useractivity); // 设置当前根目录
         DisplayMetrics dm = getResources().getDisplayMetrics();
         int y = dm.heightPixels * 1 / 12;
+        //相对位移，popwindow出现在距离底部整个屏幕1/12距离
         popupWindow.showAtLocation(rootView, Gravity.BOTTOM, 0, y);
         // popupWindow.update();//更新后显示，比如做了长宽缩小放大的处理
         backgroundAlpaha(this, 0.5f);
@@ -203,7 +206,6 @@ public class UserActivity extends BaseActivity implements OnClickListener {
                 case photoing:
                     setBitmap(uriTemp);
                     break;
-
             }
         }
 
@@ -225,7 +227,6 @@ public class UserActivity extends BaseActivity implements OnClickListener {
     }
 
     Runnable SavePic = new Runnable() {
-
         @Override
         public void run() {
             Save();

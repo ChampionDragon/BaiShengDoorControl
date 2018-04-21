@@ -35,7 +35,6 @@ public class UDPThread {
     WifiManager wifiManager;
     private Map map;
     private long first;
-
     private boolean hasConnected = false;
     private boolean hasStartReceive = false;
     public static final int MSG_UDP_CONNECTED = 21;
@@ -132,7 +131,6 @@ public class UDPThread {
                 DatagramPacket dPacket = new DatagramPacket(data, datalen,
                         inetAddress, port);
                 Logs.d(inetAddress + "  udpthread134  " + port);
-
                 try {
                     dSocket.send(dPacket);
                 } catch (IOException e) {
@@ -191,7 +189,7 @@ public class UDPThread {
 //                        Logs.d(bytes2hexStr + "\n"+"186     "
 //                                + SmallUtil.hexStr2Str(bytes2hexStr, "gb2312"));
 
-//                        Message msg = new Message();
+//                      Message msg = new Message();
                         Message msg = Message.obtain();
                         msg.what = MSG_UDP_RECEIVE;
 
@@ -199,7 +197,7 @@ public class UDPThread {
                         Bundle bundle = new Bundle();
                         bundle.putString(KEYUDPRECIP, strAddress);
                         bundle.putInt(KEYUDPRECPORT, nPort);
-                        bundle.putString(KEYUDPRECEIVE, strReceiver+"\n"+Arrays.toString(data));
+                        bundle.putString(KEYUDPRECEIVE, strReceiver + "\n" + Arrays.toString(data));
                         msg.setData(bundle);
                         handler.sendMessage(msg);
                     }

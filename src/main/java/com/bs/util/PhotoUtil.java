@@ -28,6 +28,7 @@ public class PhotoUtil {
 		ByteArrayInputStream is = new ByteArrayInputStream(os.toByteArray());
 		BitmapFactory.Options options = new Options();
 		options.inJustDecodeBounds = true;
+        Bitmap bitmap = BitmapFactory.decodeStream(is, null, options);
 		options.inJustDecodeBounds = false;
 		int h = options.outHeight;
 		int w = options.outWidth;
@@ -42,7 +43,7 @@ public class PhotoUtil {
 		options.inPreferredConfig = Config.RGB_565;
 		options.inSampleSize = b;
 		is = new ByteArrayInputStream(os.toByteArray());
-        Bitmap bitmap = BitmapFactory.decodeStream(is, null, options);
+        bitmap = BitmapFactory.decodeStream(is, null, options);
 		return bitmap;
 	}
 

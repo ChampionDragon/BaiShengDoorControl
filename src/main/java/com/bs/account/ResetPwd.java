@@ -16,14 +16,27 @@ import com.bs.base.BaseActivity;
 import com.bs.constant.Constant;
 import com.bs.http.HttpByGet;
 import com.bs.util.DialogNotileUtil;
+import com.bs.util.Logs;
 import com.bs.util.SmallUtil;
 import com.bs.util.ToastUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.Random;
 
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+/**
+ * Description: 重置密码类
+ * AUTHOR: Champion Dragon
+ * created at 2018/2/24
+ **/
 public class ResetPwd extends BaseActivity implements OnClickListener {
     private EditText phone, code, pwd, pwdConfirm;
     private Button resetpwd, codeGet;
@@ -37,6 +50,7 @@ public class ResetPwd extends BaseActivity implements OnClickListener {
     private TimeCount timeCount;
     private String codeError;
     private String ResetPwdError;
+    String urlTest = "http://192.168.10.217:8888/SSM/query.do";
 
     Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -100,7 +114,8 @@ public class ResetPwd extends BaseActivity implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.resetpwd_btn:
-                registerCheck();
+//                registerCheck();
+                RESETPWD();
                 break;
             case R.id.resetpwd_codeget:
                 codeCheck();
@@ -111,6 +126,36 @@ public class ResetPwd extends BaseActivity implements OnClickListener {
 
         }
     }
+
+    /*+++++++++++++++++++++++++++++++++++++++++   接口测试  +++++++++++++++++++++++++++++++++++*/
+    private void RESETPWD() {
+        final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        String name = phone.getText().toString();
+        final JSONObject jb = new JSONObject();
+        try {
+            jb.put("username", name);
+            Logs.v("168 " + jb.toString());
+        } catch (JSONException e) {
+            Logs.e("127  " + e);
+        }
+        executor.submit(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpClient okHttpClient = new OkHttpClient();
+                RequestBody requestBody = RequestBody.create(JSON, jb.toString());
+                Request request = new Request.Builder().post(requestBody).url(urlTest).build();
+                try {
+                    Response response = okHttpClient.newCall(request).execute();
+                    Logs.i("144   " + response.body().string());
+                } catch (IOException e) {
+                    Logs.e("146  " + e.toString());
+                }
+            }
+        });
+    }
+
+ /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
 
     private void registerCheck() {
         String phoneStr = phone.getText().toString();

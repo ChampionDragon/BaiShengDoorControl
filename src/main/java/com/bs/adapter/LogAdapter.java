@@ -40,7 +40,6 @@ public class LogAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-
         return list.size();
     }
 
@@ -116,7 +115,6 @@ public class LogAdapter extends BaseAdapter {
 
             dialog = DialogCustomUtil.create("警告", "你确定要从列表里删除这条信息", context,
                     new OnClickListener() {
-
                         @Override
                         public void onClick(View v) {
                             // Log.d(tag, location + "    logadapter119  "
@@ -146,7 +144,6 @@ public class LogAdapter extends BaseAdapter {
                             dialog.dismiss();
                         }
                     }, new OnClickListener() {
-
                         @Override
                         public void onClick(View v) {
                             dialog.dismiss();

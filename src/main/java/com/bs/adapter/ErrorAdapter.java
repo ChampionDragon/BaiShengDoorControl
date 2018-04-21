@@ -1,7 +1,5 @@
 package com.bs.adapter;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +14,8 @@ import com.bs.constant.Constant;
 import com.bs.util.TimeUtil;
 import com.bs.util.ViewHolderUtil;
 import com.bs.view.MyListView;
+
+import java.util.List;
 
 public class ErrorAdapter extends BaseAdapter {
 	private Activity activity;

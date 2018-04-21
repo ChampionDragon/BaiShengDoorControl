@@ -1,7 +1,5 @@
 package com.bs.adapter;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +12,8 @@ import com.bs.bean.ControlBean;
 import com.bs.constant.Constant;
 import com.bs.util.TimeUtil;
 import com.bs.util.ViewHolderUtil;
+
+import java.util.List;
 
 public class LogItemAdapter extends BaseAdapter {
 	private Context context;

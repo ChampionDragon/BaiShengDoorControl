@@ -224,6 +224,7 @@ public class MipcaActivityCapture extends BaseActivity implements Callback {
     };
 
 
+    /*亮灯的监听*/
     OnClickListener lightListener = new OnClickListener() {
         @Override
         public void onClick(View v) {

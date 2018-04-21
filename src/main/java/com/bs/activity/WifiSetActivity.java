@@ -54,15 +54,16 @@ public class WifiSetActivity extends BaseActivity implements View.OnClickListene
     private String wifiname, CheckID, deviceID, wifipsw;
     private WifiManager.MulticastLock multicastLock;
     Boolean xmitStarted = false;
-    xmitterTask xmitter;
+    private xmitterTask xmitter;
     private DialogLoading dialog;
     private int ONLINE = 1;
     private int OUTLINE = 2;
+    private int ERROR = 144;
     private SpUtil sp;
     private boolean IsOutline;
     private boolean IsOnline;
     private boolean IsToast;
-    String tag="WifiSetActivity";
+    private static String tag = "WifiSetActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +75,7 @@ public class WifiSetActivity extends BaseActivity implements View.OnClickListene
 /*如果是通过手动输入ID就可以通过查询此ID是否在线来判断WIFI是否配置成功*/
         CheckID = getIntent().getStringExtra(Constant.deviceId);
         Logs.d(CheckID + "   wifiset 62");
-        deviceID = "";
+        deviceID = CheckID;
     }
 
     private void initWIFI() {
@@ -84,12 +85,9 @@ public class WifiSetActivity extends BaseActivity implements View.OnClickListene
         wifiname = wifiname.replace("\"", "");//去掉双引号
         name.setText(wifiname);
         /*读取上次输入的密码*/
-        sp = SpUtil.getInstance(SpKey.SP_wifiname,
-                Context.MODE_PRIVATE);
+        sp = SpUtil.getInstance(SpKey.SP_wifiname, Context.MODE_PRIVATE);
         wifipsw = sp.getString(wifiname);
         pwd.setText(wifipsw);
-
-
     }
 
     private void initView() {
@@ -121,14 +119,14 @@ public class WifiSetActivity extends BaseActivity implements View.OnClickListene
         multicastLock.acquire();
     }
 
-    private static boolean validate(String pass, String key) {
-
-        if ((pass.length() != 0) && (pass.length() < 8 || pass.length() > 63)) {
-            ToastUtil.showShort("无效的密码，密码要大于8位小于63位或为空");
+    /*验证输入的ID号的WIFI密码是否符合要求*/
+    private boolean validate(String pass, String key) {
+        if (pass.length() < 8 || pass.length() > 63) {
+            DialogNotileUtil.show(this, "密码要大于8位小于63位");
             return false;
         }
-        if (key.length() != 10 && key.length() != 0) {
-            ToastUtil.showShort("设备号要么为空，要么为十位");
+        if (key.length() != 10) {
+            DialogNotileUtil.show(this, "ID号应该为10位");
             return false;
         }
         return true;
@@ -143,12 +141,12 @@ public class WifiSetActivity extends BaseActivity implements View.OnClickListene
         String pass = wifipsw;
         String key = deviceID;
 
+        if (!validate(pass, key)) return;
 
         allowMulticast();
 
         try {
 //            if (xmitStarted == false) {
-            if (!validate(pass, key)) return;
 
             dialog = new DialogLoading(this, "正在配置WIFI");
             dialog.show();
@@ -162,8 +160,7 @@ public class WifiSetActivity extends BaseActivity implements View.OnClickListene
             crc32.update(pass.getBytes());
             xmitter.passCRC = (int)
                     crc32.getValue() & 0xffffffff;
-            Logs.v(tag+" 147  " +
-                    Integer.toHexString(xmitter.passCRC));
+            Logs.v(tag + " 168  " + Integer.toHexString(xmitter.passCRC));
 
             if (key.length() != 0) {
                 if (pass.length() % 16 == 0) {
@@ -185,10 +182,9 @@ public class WifiSetActivity extends BaseActivity implements View.OnClickListene
                         pass.length();
             }
             xmitter.mac = new char[6];
-            String[] macParts =
-                    mWifiInfo.getBSSID().split(":");
+            String[] macParts = mWifiInfo.getBSSID().split(":");
 
-            Logs.e(tag+" 173 " + mWifiInfo.getBSSID());
+            Logs.e(tag + " 173 " + mWifiInfo.getBSSID());
             for (int i = 0; i < 6; i++)
                 xmitter.mac[i] = (char) Integer.parseInt(macParts[i], 16);
             xmitter.resetStateMachine();
@@ -204,7 +200,7 @@ public class WifiSetActivity extends BaseActivity implements View.OnClickListene
 
 
         } catch (Error err) {
-            Logs.e(tag+err.toString());
+            Logs.e(tag + err.toString());
         }
 
 
@@ -243,21 +239,21 @@ public class WifiSetActivity extends BaseActivity implements View.OnClickListene
                     boolean b = dbManager.addOrUpdateDevice(idStr, device.getName(), device.getAddress(), device.getCreateTime());
 
                     if (b) {
-                        Logs.v(tag+" 241 添加或更新设备成功");
+                        Logs.v(tag + " 241 添加或更新设备成功");
                     }
                     ToastUtil.showLong("设备WIFI配置成功.");
                     IsToast = true;
                     finish();
                 }
             } else if (msg.what == OUTLINE && IsOutline && !IsOnline) {
-                Logs.e(tag+" 248" + IsOnline + "  " + IsOutline);
+                Logs.e(tag + " 248" + IsOnline + "  " + IsOutline);
                 dialog.close();//关闭Dialog
                 DialogNotileUtil.show(WifiSetActivity.this, "设备WIFI配置失败.");
                 IsOutline = false;
+            } else if (msg.what == ERROR) {
+                SetError();
             }
             super.handleMessage(msg);
-
-
         }
     };
 
@@ -291,7 +287,7 @@ public class WifiSetActivity extends BaseActivity implements View.OnClickListene
             /*第二种方式通过查询设备ID是否有返回值*/
             byte[] packet = TestProtocol.getByCmd("1", "", TestProtocol.cmdID);
             String serverSend = UdpUtil.IpSend(packet);
-            Logs.e(tag+" 289  " + serverSend);
+            Logs.e(tag + " 289  " + serverSend);
             if (serverSend.indexOf("NO RESPONSE") >= 0) {
                 handler.sendEmptyMessage(OUTLINE);
             } else {
@@ -303,6 +299,7 @@ public class WifiSetActivity extends BaseActivity implements View.OnClickListene
                 Message msg = handler.obtainMessage(ONLINE);
                 msg.setData(bundle);
                 handler.sendMessage(msg);
+
             }
         }
     };
@@ -334,8 +331,7 @@ public class WifiSetActivity extends BaseActivity implements View.OnClickListene
 
             try {
 //                Log.d("lcb", "353         239." + u + "." + m + "." + l);
-                sessAddr = InetAddress
-                        .getByName("239." + u + "." + m + "." + l);
+                sessAddr = InetAddress.getByName("239." + u + "." + m + "." + l);
                 ms = new MulticastSocket(1234);
                 ms.joinGroup(sessAddr);
                 ms.setTimeToLive(4);
@@ -369,6 +365,14 @@ public class WifiSetActivity extends BaseActivity implements View.OnClickListene
 //            Log.d("lcb", "386    xmitState2" + substate);
 
             int u = substate | (0x2 << 5);
+
+/*++++++++++++++++++  防止出现异常  +++++++++++++++++++++*/
+            if (passphrase == null) {
+                handler.sendEmptyMessage(ERROR);
+                return;
+            }
+
+
             int l = (0xff & passphrase[2 * substate]);
             int m;
             if (len == 2)
@@ -459,7 +463,7 @@ public class WifiSetActivity extends BaseActivity implements View.OnClickListene
                 }
                /* 从80秒开始每隔十秒发送查询是否配置成功*/
                 if (i >= 80 && i % 10 == 0 && i < 131) {
-                    Logs.e(tag+" 457+++++++++++++++++++++++++++++++++++++++++++++++");
+                    Logs.e(tag + " 457+++++++++++++++++++++++++++++++++++++++++++++++");
                     Message msg = handler.obtainMessage();
                     msg.what = 42;
                     handler.sendMessage(msg);
@@ -485,7 +489,7 @@ public class WifiSetActivity extends BaseActivity implements View.OnClickListene
             mcastLock.release();
 
             if (i >= 131) {
-                Logs.d(tag+"484-------------------------------------------------");
+                Logs.d(tag + "484-------------------------------------------------");
                 Message msg = handler.obtainMessage();
                 msg.what = 44;
                 handler.sendMessage(msg);
@@ -551,8 +555,7 @@ public class WifiSetActivity extends BaseActivity implements View.OnClickListene
         if (dialog != null) {
             dialog.close();
         }
-        ToastUtil.showLong("配置出现问题");
-
+        ToastUtil.showShort("配置出现问题");
     }
 
 

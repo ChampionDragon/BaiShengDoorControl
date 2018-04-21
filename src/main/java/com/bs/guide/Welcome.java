@@ -10,7 +10,6 @@ import com.bs.account.Login;
 import com.bs.base.BaseActivity;
 import com.bs.base.BaseApplication;
 import com.bs.constant.SpKey;
-import com.bs.util.Logs;
 import com.bs.util.SmallUtil;
 import com.bs.util.SpUtil;
 import com.bs.util.SystemUtil;
@@ -28,18 +27,19 @@ public class Welcome extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_welcome);
         super.onCreate(savedInstanceState);
-        sp=SpUtil.getInstance(SpKey.SP_device,MODE_PRIVATE);
+        sp = SpUtil.getInstance(SpKey.SP_device, MODE_PRIVATE);
         isFisrt = BaseApplication.sp.getBoolean(SpKey.isFirst, true);
         int curVer = SystemUtil.VersionCode();
         int preVer = BaseApplication.sp.getInt(SpKey.preVer);
         isLogin = sp.getBoolean(SpKey.isLogin);
-        Logs.e("welcome 32 " + isLogin);
+//        Logs.e("welcome 32 " + isLogin);
         //isFisrt || curVer > preVer     !isLogin
-        if (isFisrt || curVer > preVer ) {
+        if (isFisrt || curVer > preVer) {
             handler.sendEmptyMessageDelayed(GUIDE, DELAYTIME);
             BaseApplication.sp.putInt(SpKey.preVer, curVer);
         } else if (!isLogin) {
-            handler.sendEmptyMessageDelayed(LOGIN, DELAYTIME);
+//            handler.sendEmptyMessageDelayed(LOGIN, DELAYTIME);
+            handler.sendEmptyMessageDelayed(MAIN, DELAYTIME);
         } else {
             handler.sendEmptyMessageDelayed(MAIN, DELAYTIME);
         }
@@ -62,9 +62,7 @@ public class Welcome extends BaseActivity {
                     SmallUtil.getActivity(Welcome.this, Guide.class);
                     finish();
                     break;
-
             }
-
         }
     };
 

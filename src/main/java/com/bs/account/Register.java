@@ -22,6 +22,14 @@ import com.bs.util.ToastUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class Register extends BaseActivity implements OnClickListener {
     private EditText phone, code, pwd, pwdConfirm;
     private Button register, codeGet;
@@ -36,6 +44,7 @@ public class Register extends BaseActivity implements OnClickListener {
     private TimeCount timeCount;
     private String codeError;
     private String registerError;
+    private String urlTest = "http://192.168.10.217:8888//SSM/register.do";
 
     Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -102,7 +111,8 @@ public class Register extends BaseActivity implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.register_btn:
-                registerCheck();
+//                registerCheck();
+                register();
                 break;
             case R.id.register_codeget:
                 codeCheck();
@@ -114,6 +124,45 @@ public class Register extends BaseActivity implements OnClickListener {
         }
     }
 
+     /*   ++++++++++++++++++++++++++++++++  测试后台  +++++++++++++++++++++++++++++++++++++   */
+
+    private void register() {
+
+
+        executor.submit(new Runnable() {
+            @Override
+            public void run() {
+                String name = phone.getText().toString();
+                String key = pwd.getText().toString();
+                JSONObject jb = new JSONObject();
+                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                try {
+                    jb.put("username", name);
+                    jb.put("password", key);
+                    jb.put("org_id", 10);
+                    Logs.v("144 " + jb.toString());
+                } catch (JSONException e) {
+                    Logs.d("131  " + e);
+                }
+                OkHttpClient okHttpClient = new OkHttpClient();
+                RequestBody requestBody = RequestBody.create(JSON, jb.toString());
+                Request request = new Request.Builder().post(requestBody).url(urlTest).build();
+                try {
+                    Response response = okHttpClient.newCall(request).execute();
+                    if (response.isSuccessful()) {
+                        Logs.i("150   " + response.body().string());
+                    }
+                } catch (IOException e) {
+                    Logs.e("151  " + e.toString());
+                }
+            }
+        });
+
+
+    }
+
+
+    /*  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   */
     private void registerCheck() {
         String phoneStr = phone.getText().toString();
         String codeString = code.getText().toString();
